@@ -86,7 +86,7 @@ L'objectif principal est de développer une compréhension approfondie des conce
 - Validation Croisée : Évaluation robuste du modèle
 
 # 📁 Structure du Repository
-
+```
 text
 building-perceptron/
 ├── script.py                 # Classe Perceptron implémentée
@@ -95,7 +95,7 @@ building-perceptron/
 ├── data/                   # Données du projet
 ├── visualizations/         # Graphiques et visualisations
 └── requirements.txt        # Dépendances Python
-
+```
 # 📈 Résultats et Conclusions
 
 ## Performance du Perceptron
