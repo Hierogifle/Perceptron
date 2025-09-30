@@ -13,3 +13,27 @@ Ten real-valued features are computed for each cell nucleus:
 	h) concave points (number of concave portions of the contour)
 	i) symmetry 
 	j) fractal dimension ("coastline approximation" - 1)
+
+Voici la traduction de la description du dataset Breast Cancer Wisconsin :
+
+Francais 
+
+	1. Numéro d'identification
+	2. Diagnostic (M = malin, B = bénin)
+	3. Rayon (moyenne des distances du centre aux points du périmètre)
+	4. Texture (écart-type des valeurs en niveaux de gris)
+
+
+3-32)
+
+Dix caractéristiques à valeurs réelles sont calculées pour chaque noyau cellulaire :
+a) rayon (moyenne des distances du centre aux points du périmètre)
+b) texture (écart-type des valeurs en niveaux de gris)
+c) périmètre
+d) aire
+e) lissage (variation locale des longueurs de rayon)
+f) compacité (périmètre^2 / aire - 1.0)
+g) concavité (sévérité des portions concaves du contour)
+h) points concaves (nombre de portions concaves du contour)
+i) symétrie
+j) dimension fractale ("approximation de ligne de côte" - 1)

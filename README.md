@@ -90,6 +90,7 @@ La décision du perceptron se calcule ainsi :
    <img src="images/formule_perceptron.png" alt="y_hat = activation(w1 * x1 + w2 * x2 + ... + wn * xn + b)" style="width: 40%; max-width: 900px;">
 </div>
 
+- ŷ  : prédiction du perceptron
 - z : somme pondérée des entrées plus le biais (équivalent du potentiel d’action).
 - f : fonction d’activation qui convertit z en 0 ou 1.
 - wi : poids attribué à cette entrée (force du lien synaptique).
@@ -112,7 +113,6 @@ L’apprentissage consiste à ajuster les poids wi et le biais b pour que le per
 
 - η : taux d'apprentissage
 - y : label attendu
-- ŷ  : prédiction du perceptron
 
 Ce formalisme est la base du perceptron simple, utilisé pour la classification binaire linéaire.
 
@@ -159,6 +159,8 @@ Pour traiter des données non linéaires, on assemble plusieurs perceptrons en c
 #### 8. Exemples de code Python (orienté objet)
 
 *python*
+
+```
 import numpy as np
 
 class Perceptron:
@@ -181,10 +183,15 @@ class Perceptron:
                 delta = y - y_pred
                 self.w += self.lr * delta * x
                 self.b += self.lr * delta
+```
 
-Test rapide :
-python
-# Données factices
+#### Test rapide :
+
+**Données factices**
+
+*python*
+
+```
 X = np.random.randn(200, 2)
 y = np.where(X[:,0] + X[:,1] > 0, 1, 0)
 
@@ -195,49 +202,159 @@ preds = np.array([model.predict(x) for x in X])
 print("Précision :", np.mean(preds == y))
 
 <div style="page-break-after: always;"></div>
+```
 
-## Phase 2 : Implémentation
+## Phase 2 : Compréhension et Analyse des Données
 
-- Développer une classe Perceptron en Python (programmation orientée objet)
+Chargement et exploration du dataset Breast Cancer Wisconsin
 
-- Tester le modèle sur des données factices générées aléatoirement
+Analyse exploratoire des données (EDA)
 
-- Valider le fonctionnement de l'algorithme d'apprentissage
+Statistiques descriptives, visualisations, corrélations
 
-## Phase 3 : Application Pratique
+Détection des outliers et valeurs manquantes
 
-- Analyser le dataset Breast Cancer Wisconsin
-
-- Réaliser une analyse exploratoire complète des données
-
-- Appliquer des techniques de réduction de dimensionnalité
-
-- Évaluer les performances du Perceptron avec des métriques appropriées
-
-- Proposer des améliorations pour optimiser les résultats
-
-# 📊 Données Utilisées
+### 📊 Données Utilisées
 
 **Dataset** : Breast Cancer Wisconsin
-**Source** : UCI Machine Learning Repository
+**Source** : UCI Machine Learning Repository (https://archive.ics.uci.edu/datasets)
 
 - Problématique : Classification binaire pour le diagnostic du cancer du sein
 
 - Caractéristiques : 30 features numériques décrivant les caractéristiques des noyaux cellulaires
 
-- Objectif : Prédire si une tumeur est bénigne ou maligne
+Structure du Dataset Breast Cancer Wisconsin
 
-## Approche d'Analyse
+### 🔍 Vue d'ensemble
 
-- Nettoyage des données : Gestion des valeurs manquantes et des outliers
+- 569 échantillons (212 malins (37%), 357 bénins(63%))
+- 32 colonnes : 1 ID + 1 diagnostic + 30 caractéristiques numériques
 
-- Analyse exploratoire : Visualisations et statistiques descriptives
+Source : Images FNA (biopsie à l'aiguille fine) de masses mammaires
 
-- Réduction de dimensionnalité : Application de techniques appropriées
+Objectif : Classification binaire pour diagnostic du cancer du sein
 
-- Modélisation : Entraînement du Perceptron développé
+### 📊 Variables du dataset
 
-- Évaluation : Métriques de performance adaptées au contexte médical
+Variable  |	Description                        | Utilité        |
+----------|------------------------------------|----------------|
+id	      |Identifiant unique de l'échantillon | Identification |
+diagnosis |	Diagnostic (M = malin, B = bénin)  | Variable cible |
+
+### 🧬 Les 30 caractéristiques (features)
+
+Chaque caractéristique de base est calculée sous 3 formes différentes :
+
+Suffixes des colonnes :
+- _mean (colonnes 3-12) : Valeurs moyennes
+- _se (colonnes 13-22) : Erreurs standard (variabilité)
+- _worst (colonnes 23-32) : Pires valeurs (moyenne des 3 plus extrêmes)
+
+10 caractéristiques de base mesurées sur le noyau cellulaire :
+
+*radius : Distance moyenne centre-périmètre (taille)*
+Définition : Distance moyenne entre le centre du noyau cellulaire et tous les points de son périmètre.
+- Calcul concret : On identifie le centre géométrique du noyau, puis on mesure la distance à chaque point du contour et on fait la moyenne.
+- Valeurs typiques : 6-28 unités (pixels)
+- Signification clinique : Un rayon élevé indique des cellules plus grosses, souvent associées à la malignité.
+- Pourquoi c'est important : Les cellules cancéreuses ont tendance à être plus volumineuses que les cellules normales.
+
+*texture : Écart-type des niveaux de gris (rugosité)*
+Définition : Écart-type des intensités de niveaux de gris dans une région du noyau.
+- Calcul concret : On analyse la variation de luminosité pixel par pixel dans le noyau (homogène vs hétérogène).
+- Valeurs typiques : 9-40 unités
+- Signification clinique : Texture élevée = noyau "granuleux" ou irrégulier, caractéristique des cellules malignes.
+- Analogie : Comme la différence entre une surface lisse (faible texture) et rugueuse (forte texture).
+
+*perimeter : Longueur du contour (circonférence)*
+Définition : Longueur totale du contour du noyau cellulaire.
+- Calcul concret : Somme des distances entre tous les pixels adjacents formant le contour.
+- Valeurs typiques : 40-190 unités
+- Signification clinique : Périmètre élevé peut indiquer une forme irrégulière ou une taille importante.
+- Relation : Fortement corrélé au rayon et à l'aire.
+
+*area : Surface du noyau (taille 2D)*
+Définition : Surface totale occupée par le noyau cellulaire.
+- Calcul concret : Nombre de pixels à l'intérieur du contour du noyau.
+- Valeurs typiques : 140-2500 unités²
+- Signification clinique : Aire importante = cellule volumineuse, souvent maligne.
+- Note : Aire = π × rayon², d'où la forte corrélation entre ces variables.
+
+*smoothness : Variation locale du rayon (régularité)*
+Définition : Variation locale des longueurs de rayon (écart-type des rayons).
+- Calcul concret : On mesure plusieurs rayons depuis le centre et on calcule leur variabilité.
+- Valeurs typiques : 0.05-0.16 unités
+- Signification clinique : Faible lissage = contour irrégulier, "bosselé", typique des cellules malignes.
+- Interprétation : 0 = cercle parfait, valeurs élevées = forme très irrégulière.
+
+*compactness : Périmètre²/aire - 1.0 (forme)*
+Définition : Formule (périmètre² / aire) - 1.0
+- Calcul concret : Mesure de l'efficacité géométrique de la forme.
+- Valeurs typiques : 0.02-0.35 unités
+- Signification clinique : Compacité élevée = forme étalée ou irrégulière.
+- Référence : Un cercle parfait a une compacité de 0, les formes irrégulières ont des valeurs plus élevées.
+
+*concavity : Sévérité des portions concaves (creux)*
+Définition : Sévérité des portions concaves du contour (zones qui "rentrent vers l'intérieur").
+- Calcul concret : Somme des profondeurs des indentations divisée par la surface.
+- Valeurs typiques : 0-0.43 unités
+- Signification clinique : Concavité élevée = nombreux "creux" dans le contour, signe de malignité.
+- Visualisation : Comme mesurer la profondeur des "entailles" dans le contour.
+
+*concave_points : Nombre de portions concaves (irrégularité)*
+Définition : Nombre de portions concaves sur le contour du noyau.
+- Calcul concret : Comptage des zones où le contour "rentre vers l'intérieur".
+- Valeurs typiques : 0-0.2 unités (normalisé par la taille)
+- Signification clinique : Plus il y a de points concaves, plus la forme est irrégulière et potentiellement maligne.
+- Différence avec concavity : Ici on compte, là-bas on mesure la profondeur.
+
+*symmetry : Mesure de symétrie du noyau*
+Définition : Mesure de la symétrie du noyau par rapport à son centre.
+- Calcul concret : Comparaison entre les moitiés droite/gauche et haut/bas du noyau.
+- Valeurs typiques : 0.1-0.3 unités
+- Signification clinique : Asymétrie élevée = forme déséquilibrée, souvent associée à la malignité.
+- Interprétation : 0 = parfaitement symétrique, valeurs élevées = très asymétrique.
+
+*fractal_dimension : Complexité du contour (dimension fractale)*
+Définition : Mesure mathématique de la complexité du contour ("approximation de ligne de côte" - 1).
+- Calcul concret : Utilise l'algorithme de "coastline approximation" pour mesurer la rugosité du contour.
+- Valeurs typiques : 1.0-2.1 unités
+- Signification clinique : Dimension fractale élevée = contour très complexe et irrégulier, caractéristique des cellules malignes.
+- Analogie : Comme mesurer la complexité d'une côte : plus elle est découpée, plus sa dimension fractale est élevée.
+
+### 🎯 Variables les plus discriminantes
+
+- Taille : radius_mean, area_mean, perimeter_mean
+- Forme : concavity_mean, concave_points_mean, compactness_mean
+- Variables _worst : souvent très informatives pour détecter les cas extrêmes
+
+Cette structure permet d'analyser finement les caractéristiques morphologiques des cellules pour distinguer les tumeurs bénignes des malignes.
+
+## Phase 3 : Préparation des Données
+
+Nettoyage des données
+
+Normalisation/standardisation
+
+Réduction de dimensionnalité (PCA)
+
+Division train/test
+
+## Phase 4 : Implémentation du Modèle
+
+Développer la classe Perceptron
+
+Tests sur données factices pour validation
+
+## Phase 5 : Application et Évaluation
+
+Entraînement sur les vraies données préparées
+
+Évaluation des performances
+
+Analyse des résultats et améliorations
+
+
 
 # 🛠️ Outils et Technologies
 
