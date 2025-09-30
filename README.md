@@ -87,7 +87,7 @@ Cette structure lui permet de distinguer deux catégories d’objets ou de donn�
 La décision du perceptron se calcule ainsi :
 <br>
 <div align="center">
-   <img src="images/formule_perceptron.png" alt="y_hat = activation(w1 * x1 + w2 * x2 + ... + wn * xn + b)" style="width: 60%; max-width: 900px;">
+   <img src="images/formule_perceptron.png" alt="y_hat = activation(w1 * x1 + w2 * x2 + ... + wn * xn + b)" style="width: 40%; max-width: 900px;">
 </div>
 <br>
 - xi : valeur de la i-ème entrée (ex. intensité d’un pixel).
@@ -100,7 +100,7 @@ La décision du perceptron se calcule ainsi :
 La fonction d’activation la plus simple est le seuil de Heaviside :
 <br>
 <div align="center">
-   <img src="images/regle_activation.png" alt="Fonction d'activation" style="width: 60%; max-width: 900px;">
+   <img src="images/regle_activation.png" alt="Fonction d'activation" style="width: 40%; max-width: 900px;">
 </div>
 <br>
 
@@ -109,7 +109,7 @@ La fonction d’activation la plus simple est le seuil de Heaviside :
 L’apprentissage consiste à ajuster les poids wi et le biais b pour que le perceptron donne la bonne réponse sur des exemples connus. On utilise la règle de mise à jour suivante pour chaque exemple (x,y) :
 <br>
 <div align="center">
-   <img src="images/regle_apprentissage.png" alt="Fonction d'apprentissage" style="width: 60%; max-width: 900px;">
+   <img src="images/regle_apprentissage.png" alt="Fonction d'apprentissage" style="width: 40%; max-width: 900px;">
 </div>
 <br>
 
