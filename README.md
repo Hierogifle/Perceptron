@@ -87,7 +87,7 @@ Cette structure lui permet de distinguer deux catégories d’objets ou de donn�
 La décision du perceptron se calcule ainsi :
 
 <div align="center">
-   <img src="images/formule_perceptron.png" alt="y_hat = activation(w1 * x1 + w2 * x2 + ... + wn * xn + b)" style="width: 30%; max-width: 900px;">
+   <img src="images/formule_perceptron.png" alt="y_hat = activation(w1 * x1 + w2 * x2 + ... + wn * xn + b)" style="width: 40%; max-width: 900px;">
 </div>
 
 - z : somme pondérée des entrées plus le biais (équivalent du potentiel d’action).
