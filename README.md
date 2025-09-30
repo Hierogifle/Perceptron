@@ -90,12 +90,11 @@ La décision du perceptron se calcule ainsi :
    <img src="images/formule_perceptron.png" alt="y_hat = activation(w1 * x1 + w2 * x2 + ... + wn * xn + b)" style="width: 30%; max-width: 900px;">
 </div>
 
-- xi : valeur de la i-ème entrée (ex. intensité d’un pixel).
-- wi : poids attribué à cette entrée (force du lien synaptique).
-- b : biais, permet de décaler la frontière de décision.
 - z : somme pondérée des entrées plus le biais (équivalent du potentiel d’action).
-- f : fonction d’activation qui convertit 
-- z en 0 ou 1.
+- f : fonction d’activation qui convertit z en 0 ou 1.
+- wi : poids attribué à cette entrée (force du lien synaptique).
+- xi : valeur de la i-ème entrée (ex. intensité d’un pixel).
+- b : biais, permet de décaler la frontière de décision.
 
 La fonction d’activation la plus simple est le seuil de Heaviside :
 
