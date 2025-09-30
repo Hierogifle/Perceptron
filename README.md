@@ -206,10 +206,6 @@ print("Précision :", np.mean(preds == y))
 
 ## Phase 2 : Compréhension et Analyse des Données
 
-Chargement et exploration du dataset Breast Cancer Wisconsin
-
-Analyse exploratoire des données (EDA)
-
 Statistiques descriptives, visualisations, corrélations
 
 Détection des outliers et valeurs manquantes
@@ -231,6 +227,8 @@ Structure du Dataset Breast Cancer Wisconsin
 - 32 colonnes : 1 ID + 1 diagnostic + 30 caractéristiques numériques
 
 Source : Images FNA (biopsie à l'aiguille fine) de masses mammaires
+
+Les caractéristiques sont calculées à partir d'une image numérisée d'une ponction à l'aiguille fine (PAF) d'une masse mammaire. Elles décrivent les caractéristiques des noyaux cellulaires présents sur l'image.
 
 Objectif : Classification binaire pour diagnostic du cancer du sein
 
@@ -324,11 +322,13 @@ Définition : Mesure mathématique de la complexité du contour ("approximation 
 
 ### 🎯 Variables les plus discriminantes
 
-- Taille : radius_mean, area_mean, perimeter_mean
-- Forme : concavity_mean, concave_points_mean, compactness_mean
-- Variables _worst : souvent très informatives pour détecter les cas extrêmes
+- *Taille* : radius_mean, area_mean, perimeter_mean
+- *Forme* : concavity_mean, concave_points_mean, compactness_mean
+- Variables *_worst* : souvent très informatives pour détecter les cas extrêmes
 
 Cette structure permet d'analyser finement les caractéristiques morphologiques des cellules pour distinguer les tumeurs bénignes des malignes.
+
+
 
 ## Phase 3 : Préparation des Données
 
