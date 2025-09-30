@@ -54,15 +54,15 @@ Performances sur tâches complexes | Limitées             | Excellentes        
 
 Voici trois exemples emblématiques, inspirés d’AI Experiments et d’OpenAI :
 
-#### Diagnostic médical assisté par imagerie
+#### 1. Diagnostic médical assisté par imagerie
 
 Des réseaux de neurones convolutionnels (CNN) analysent des radiographies ou IRM pour détecter automatiquement des tumeurs ou anomalies. Cette approche accélère le diagnostic du cancer et améliore la précision des dépistages.
 
-#### Véhicules autonomes
+#### 2. Véhicules autonomes
 
 Les systèmes embarqués s’appuient sur des CNN et des vision transformers pour reconnaître en temps réel les piétons, panneaux de signalisation et autres véhicules, permettant à la voiture de naviguer en toute sécurité sans intervention humaine.
 
-#### Traitement automatique du langage naturel (NLP)
+#### 3. Traitement automatique du langage naturel (NLP)
 
 Les modèles de type Transformers (GPT, BERT) gèrent la traduction, la génération de texte et les chatbots. Par exemple, ChatGPT comprend et produit un langage proche du dialogue humain pour l’assistance en ligne ou la création de contenu.
 
@@ -85,11 +85,11 @@ Cette structure lui permet de distinguer deux catégories d’objets ou de donn�
 #### 2. **Formule mathématique et signification des termes**
 
 La décision du perceptron se calcule ainsi :
-<br>
+
 <div align="center">
    <img src="images/formule_perceptron.png" alt="y_hat = activation(w1 * x1 + w2 * x2 + ... + wn * xn + b)" style="width: 40%; max-width: 900px;">
 </div>
-<br>
+
 - xi : valeur de la i-ème entrée (ex. intensité d’un pixel).
 - wi : poids attribué à cette entrée (force du lien synaptique).
 - b : biais, permet de décaler la frontière de décision.
@@ -98,24 +98,29 @@ La décision du perceptron se calcule ainsi :
 - z en 0 ou 1.
 
 La fonction d’activation la plus simple est le seuil de Heaviside :
-<br>
+
 <div align="center">
    <img src="images/regle_activation.png" alt="Fonction d'activation" style="width: 40%; max-width: 900px;">
 </div>
-<br>
 
 #### 3. Comment apprend-on ?
 
-L’apprentissage consiste à ajuster les poids wi et le biais b pour que le perceptron donne la bonne réponse sur des exemples connus. On utilise la règle de mise à jour suivante pour chaque exemple (x,y) :
-<br>
+L’apprentissage consiste à ajuster les poids wi et le biais b pour que le perceptron donne la bonne réponse sur des exemples connus. on utlise la règle d'apprentissage du perceptron (mise à jour des poids) :
+
 <div align="center">
    <img src="images/regle_apprentissage.png" alt="Fonction d'apprentissage" style="width: 40%; max-width: 900px;">
 </div>
-<br>
 
-1. Calculer la sortie : y^=f(∑wi xi+b)
-2. Mesurer l’erreur : δ=y−y^
-3. Mettre à jour : wi←wi+η δ xietb←b+η δ
+- η : taux d'apprentissage
+- y : label attendu
+- ŷ  : prédiction du perceptron
+
+Ce formalisme est la base du perceptron simple, utilisé pour la classification binaire linéaire.
+
+1. Calculer la sortie : ŷ = f(∑wi × xi + b)
+2. Mesurer l'erreur : δ = y - ŷ  
+3. Mettre à jour les poids : wi = wi + η × δ × xi
+4. Mettre à jour le biais : b = b + η × δ
     où η est le taux d’apprentissage, un petit nombre (ex. 0,01) qui détermine la vitesse d’ajustement.
 
 On répète ces étapes sur tous les exemples, plusieurs fois (plusieurs époques), jusqu’à obtenir un taux de bonnes réponses satisfaisant.
