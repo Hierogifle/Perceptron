@@ -1,0 +1,65 @@
+# === Environnements Python ===
+envPerceptron/
+env/
+venv/
+__pycache__/
+*.py[cod]
+*.pyo
+
+# === Notebooks checkpointeurs ===
+# .ipynb_checkpoints/
+
+# === Données ===
+# data/
+# *.csv
+# *.tsv
+# *.xlsx
+# *.xls
+# *.json
+# *.zip
+
+# Garde les exemples vides :
+# !data/.gitkeep
+
+# === Résultats de modèles / figures ===
+# models/
+# artifacts/
+# *.pkl
+# *.joblib
+# *.h5
+# *.sav
+
+# === Visualisations & rapports ===
+figures/
+outputs/
+reports/
+*.pdf
+*.png
+*.jpg
+
+# === Fichiers JupyterLab/VS Code ===
+# .vscode/
+# .idea/
+# *.code-workspace
+
+# === Logs & fichiers temporaires ===
+# *.log
+# *.tmp
+# .DS_Store
+# Thumbs.db
+
+# === Résultats exportés ===
+# *.html
+# *.md
+
+# === Cache pip / build / dist ===
+# pip-wheel-metadata/
+# __pypackages__/
+# dist/
+# build/
+
+# === Exclusions spécifiques (optionnel) ===
+# !notebooks/               # si tu veux versionner tous tes notebooks
+# !src/                     # garder le code source versionné
+# !requirements.txt         # toujours versionner les dépendances
+# !README.md                # idem pour le fichier de description

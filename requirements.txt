@@ -1,6 +1,17 @@
-# Place ici tes dépendances Python
-# Exemple :
-# pandas
-# numpy
-# scikit-learn
-# streamlit
+# Core Python packages
+numpy==1.26.4
+pandas==2.2.2
+matplotlib==3.8.4
+seaborn==0.13.2
+
+# Machine learning
+scikit-learn==1.4.2
+imbalanced-learn==0.12.2
+
+# Feature selection
+# Décommente si tu utilises Boruta pour la sélection de variables
+# boruta==0.3
+
+# Utilitaire
+jupyter==1.0.0
+notebook==7.1.2
